@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LiveStreamTests {
 
@@ -33,5 +32,17 @@ public class LiveStreamTests {
     @Test
     void newImmutableStream() {
         ImmutableLiveStream stream = new ImmutableLiveStream(UUID.randomUUID().toString(), "Immutable stream", "Created an Immutable stream", "", LocalDateTime.of(2022, 8, 3, 15, 30, 0), LocalDateTime.of(2022, 8, 3, 16, 30, 0));
+
+        assertEquals("Immutable stream",stream.getTitle());
+    }
+
+    @Test
+    void create_new_record_live_stream(){
+        LiveStream stream = new LiveStream(UUID.randomUUID().toString(), "Record stream", "Created an Immutable stream", "", LocalDateTime.of(2022, 8, 3, 15, 30, 0), LocalDateTime.of(2022, 8, 3, 16, 30, 0));
+
+        assertNotNull(stream);
+        assertEquals("Record stream", stream.title());
+        assertTrue(stream.getClass().isRecord());
+        assertEquals(6,stream.getClass().getRecordComponents().length);
     }
 }
